@@ -88,15 +88,17 @@ ynh_app_setting_set $app port $port
 # INSTALL DEPS
 #==============================================
 
-## Install PHP 7.2
-ynh_install_php --phpversion=7.3
+## Install PHP 7.3
+ynh_package_install ca-certificates apt-transport-https
+wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
+echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list
 
 ## Get apt updates
 ynh_package_update
 ynh_package_install libargon2-1 libsodium23 libzip5 memcached php-igbinary php-memcached php-msgpack php-xdebug php7.3 php7.3-bcmath php7.3-cli php7.3-common php7.3-curl php7.3-fpm php7.3-gd php7.3-json php7.3-mbstring php7.3-mysql php7.23opcache php7.3-readline php7.3-xml php7.3-zip
 
 
-## Start php7.2
+## Start php7.3
 systemctl enable php7.3-fpm
 systemctl start php7.3-fpm
 
